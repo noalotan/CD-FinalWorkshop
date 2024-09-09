@@ -1,0 +1,16 @@
+---
+- name: Install yum-utils
+  dnf:
+    name: yum-utils
+    state: present
+
+- name: Verify yum-utils installation
+  command: yum-config-manager --version
+  register: yum_utils_version
+  ignore_errors: yes
+
+- name: Print yum-utils version (if available)
+  debug:
+    msg: "yum-utils version: {{ yum_utils_version.stdout }}"
+  when: yum_utils_version.rc == 0
+

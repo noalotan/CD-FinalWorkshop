@@ -1,0 +1,28 @@
+---
+- name: Download the EPEL GPG key
+  get_url:
+    url: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+    dest: /tmp/RPM-GPG-KEY-EPEL-9
+
+- name: Import the EPEL GPG key
+  rpm_key:
+    key: /tmp/RPM-GPG-KEY-EPEL-9
+    state: present
+
+- name: Download the EPEL release package
+  get_url:
+    url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+    dest: /tmp/epel-release-latest-9.noarch.rpm
+
+- name: Install the EPEL release package
+  package:
+    name: /tmp/epel-release-latest-9.noarch.rpm
+    state: present
+
+- name: Clean up temporary files
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /tmp/RPM-GPG-KEY-EPEL-9
+    - /tmp/epel-release-latest-9.noarch.rpm

@@ -1,0 +1,27 @@
+---
+- name: Ensure Python 3 is installed
+  dnf:
+    name: python3
+    state: present
+
+- name: Ensure pip for Python 3 is installed
+  dnf:
+    name: python3-pip
+    state: present
+
+- name: Verify Python 3 version
+  command: python3 --version
+  register: python_version
+
+- name: Print Python 3 version
+  debug:
+    msg: "Python 3 version: {{ python_version.stdout }}"
+
+- name: Verify pip3 version
+  command: pip3 --version
+  register: pip_version
+
+- name: Print pip3 version
+  debug:
+    msg: "pip3 version: {{ pip_version.stdout }}"
+

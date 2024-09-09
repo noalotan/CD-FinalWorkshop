@@ -1,0 +1,17 @@
+---
+- name: Run all playbooks
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Import epel.yml
+      include_tasks: /home/ec2-user/CD-FinalWorshop/ansible/epel.yml
+
+    - name: Import git.yml
+      include_tasks: /home/ec2-user/CD-FinalWorshop/ansible/git.yml
+
+    - name: Import python-pip.yml
+      include_tasks: /home/ec2-user/CD-FinalWorshop/ansible/git.yml
+
+    - name: Import yum-utils.yml
+      include_tasks: /home/ec2-user/CD-FinalWorshop/ansible/yum-utils.yml
+
